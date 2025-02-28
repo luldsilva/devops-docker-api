@@ -32,8 +32,14 @@ jobs:
           username: ${{ secrets.DOCKERHUB_USERNAME }}
           password: ${{ secrets.DOCKERHUB_TOKEN }}
 
-      - name: Build docker image
-        run: docker build -t lucasmiha/ci-api:${{ steps.generate_tag.outputs.sha}} .
+      - name: Build and Push
+        uses: docker/build-push-action@v5
+        with:
+          push: true
+          tags: lucasmiha/ci-api:${{ steps.generate_tag.outputs.sha}},lucasmiha/ci-api:latest
 
-      - name: Push image
-        run: docker push lucasmiha/ci-api:${{ steps.generate_tag.outputs.sha}}
+      # - name: Build docker image
+      #   run: docker build -t lucasmiha/ci-api:${{ steps.generate_tag.outputs.sha}} .
+
+      # - name: Push image
+      #   run: docker push lucasmiha/ci-api:${{ steps.generate_tag.outputs.sha}}

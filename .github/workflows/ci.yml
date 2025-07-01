@@ -30,6 +30,9 @@ jobs:
           SHA=$(echo $GITHUB_SHA | head -c7)
           echo "sha=$SHA" >> $GITHUB_OUTPUT
 
+      - name: Debug OIDC Token
+        run: echo "${ACTIONS_ID_TOKEN_REQUEST_URL}"
+
       - name: Configure AWS credentials
         uses: aws-actions/configure-aws-credentials@v4.1.0
         with:

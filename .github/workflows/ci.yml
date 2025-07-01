@@ -51,8 +51,13 @@ jobs:
       #     push: true
       #     tags: lucasmiha/ci-api:${{ steps.generate_tag.outputs.sha}},lucasmiha/ci-api:latest
 
-      # - name: Build docker image
-      #   run: docker build -t lucasmiha/ci-api:${{ steps.generate_tag.outputs.sha}} .
+      - name: Build docker image
+        env:
+          REGISTRY: ${{ steps.login-ecr.outputs.registry }}
+          TAG: ${{ steps.generate_tag.outputs.sha }}
+        run: |
+          docker build -t $REGISTRY/ci:$TAG .
+          docker push $REGISTRY/ci:$TAG
 
       # - name: Push image
       #   run: docker push lucasmiha/ci-api:${{ steps.generate_tag.outputs.sha}}

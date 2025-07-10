@@ -71,7 +71,7 @@ jobs:
           service: rocketseat-api
           image: ${{ steps.build-docker-image.outputs.image }}
           access-role-ern: arn:aws:iam::891377043166:role/app-runner-role
-          region: us-east-2
+          region: sa-east-1
           cpu: 1
           memory: 2
           port: 3000
